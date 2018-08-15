@@ -5,6 +5,7 @@ Murphi Law = worst case
 Prioritisation
 
 
+```
            │             │              
            │  Important  │ Unimportant  
 ───────────┼─────────────┼──────────────
@@ -21,6 +22,7 @@ Prioritisation
            │             │              
            │             │              
            │             │              
+```
 
 Break down the tasks
 
