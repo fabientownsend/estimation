@@ -45,26 +45,25 @@ How to provide a good estimation?
 You can break down your task/story in order to understand what you are really
 estimating:
 
-- Documentation
-- Integration to the current system
-- Localisation
-- Legality
-- Implementation of the code
-- Exception management (recovery)
-- Code review 🐛
-- Unit test 🐛
-- Integration test 🐛
-- Manuel test 🐛
-- e2e test 🐛
-- Security
-- Log Events
-- Metrics
-- Alarm
-- Tracing
-- Performance
-- Package 📦
-- Deployment 🚀
-- User experience
-- UI
-- Accessibility
-
+- [ ] Documentation
+- [ ] Integration to the current system
+- [ ] Localisation
+- [ ] Legality
+- [ ] Implementation of the code
+- [ ] Exception management (recovery)
+- [ ] Code review 🐛
+- [ ] Unit test 🐛
+- [ ] Integration test 🐛
+- [ ] Manuel test 🐛
+- [ ] e2e test 🐛
+- [ ] Security
+- [ ] Log Events
+- [ ] Metrics
+- [ ] Alarm
+- [ ] Tracing
+- [ ] Performance
+- [ ] Package 📦
+- [ ] Deployment 🚀
+- [ ] User experience
+- [ ] UI
+- [ ] Accessibility
