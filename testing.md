@@ -16,7 +16,7 @@
 - Usefuleness
 
 
-### The scope
+### The scope 🔬/🔭
 
 The scope of your test determines how much of your system is convered. Does it
 involve only a small function, some classes or a different system and database.
@@ -28,7 +28,7 @@ The most popular tests related to their scope are the:
 - Observability
 
 
-### Complexity / Type
+### Complexity / Type 🤯
 
 The complexity of a test can be caused by its scope, for example writing
 and maintaining a unit test is way easier than a e2e test. The complexity  can 
@@ -37,7 +37,7 @@ an e2e test. The domain can also have an impact on the complexity. For example,
 IoT could be more tricky than a web application.
 
 
-### Speed
+### Speed ⚡️
 
 How fast are your tests running? Manual vs automated tests: it's where you can feel
 the difference between the time you spend to manually test a function or running
@@ -47,7 +47,7 @@ it take you to realise that your feature doesn't work, either locally or in
 production?
 
 
-### Cycle
+### Cycle 📫
 
 How often do you need to run your tests? Having automated tests that run at the
 speed of light is awesome when it's something that requires to be tested
@@ -56,7 +56,7 @@ only need it once? Do you need to run these tests that often if they aren't that
 useful? Is it worth the time?
 
 
-### Usefuleness
+### Usefuleness 🌂
 
 How useful is the test? Based on the Parito Principle, we could say that 20% of 
 the users use 80% of the product. Based on that, testing your software the same

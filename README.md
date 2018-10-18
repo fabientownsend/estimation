@@ -1,2 +1,2 @@
-[estimation] (./estimation.md)
-[testing] (./testing.md)
+[estimation](estimation.md)
+[testing](testing.md)
