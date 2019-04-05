@@ -1,5 +1,14 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button, Alert, ScrollView} from 'react-native';
+import React, {Component, useState} from 'react';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Alert,
+  ScrollView,
+  TextInput,
+} from 'react-native';
 import Swipeable from 'react-native-swipeable';
 
 const topics = [
@@ -27,13 +36,6 @@ const topics = [
   {name: 'Accessibility', estimation: 0},
 ];
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
 function Estimations(props) {
   const topicsName = {
     borderColor: '#333333',
@@ -46,21 +48,33 @@ function Estimations(props) {
 
   const result = props.topics.map((t, index) => {
     let swipeable = null;
-    const rightButtons = [
-      <Text
-        key={index}
-        style={topicsName}
-        onPress={() => {
-          swipeable.recenter();
-          props.deleteTopic(t.name);
-        }}>
+    const bla = () => props.deleteTopic(t.name);
+
+    const rightButtons = (
+      <Text key={index} style={topicsName} onPress={() => {}}>
         Delete
-      </Text>,
-    ];
+      </Text>
+    );
 
     return (
-      <Swipeable onRef={ref => (swipeable = ref)} rightButtons={rightButtons}>
-        <Text style={topicsName}>{t.name}</Text>
+      <Swipeable
+        onRef={ref => (swipeable = ref)}
+        onRightActionRelease={bla}
+        rightContent={rightButtons}>
+        <View
+          style={{
+            flexDirection: 'row',
+            borderColor: '#333333',
+            borderWidth: 0.5,
+            borderStyle: 'solid',
+            height: 45,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <Text style={{flex: 0.5}}>{t.name}:</Text>
+          <NumberInput topic={t.name} addEstimation={props.addEstimation} />
+          <View style={{flex: 0.2}} />
+        </View>
       </Swipeable>
     );
   });
@@ -73,6 +87,7 @@ export default class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.deleteElement = this.deleteElement.bind(this);
+    this.addEstimation = this.addEstimation.bind(this);
     this.state = {
       topics: [
         {name: 'Documentation', estimation: 0},
@@ -106,6 +121,17 @@ export default class App extends Component<Props> {
     this.setState({topics: filteredElements});
   }
 
+  addEstimation(element, estimation) {
+    const lol = this.state.topics.map(e => {
+      if (e.name === element) {
+        e.estimation = estimation;
+      }
+      return e;
+    });
+
+    this.setState({topics: lol});
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -113,16 +139,33 @@ export default class App extends Component<Props> {
           <Text style={styles.welcome}>Estimation time!</Text>
         </View>
         <View style={{flex: 4}}>
-        <ScrollView>
-          <Estimations
-            topics={this.state.topics}
-            deleteTopic={this.deleteElement}
-          />
-        </ScrollView>
+          <ScrollView>
+            <Estimations
+              topics={this.state.topics}
+              deleteTopic={this.deleteElement}
+              addEstimation={this.addEstimation}
+            />
+          </ScrollView>
         </View>
       </View>
     );
   }
+}
+
+function NumberInput(props) {
+  const [estimation, setEstimation] = useState('0');
+
+  return (
+    <TextInput
+      style={{flex: 0.2, color: '#000000'}}
+      keyboardType="numeric"
+      onChangeText={input => {
+        props.addEstimation(props.topic, input);
+        setEstimation(input);
+      }}
+      value={estimation}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
