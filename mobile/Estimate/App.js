@@ -47,146 +47,112 @@ function Estimations(props) {
   };
 
   const result = props.topics.map((t, index) => {
-    let swipeable = null;
-    const bla = () => props.deleteTopic(t.name);
-
-    const rightButtons = (
-      <Text key={index} style={topicsName} onPress={() => {}}>
-        Delete
-      </Text>
-    );
+    const rightButtons = <Text style={topicsName}>Delete</Text>;
 
     return (
-      <Swipeable
-        onRef={ref => (swipeable = ref)}
-        onRightActionRelease={bla}
-        rightContent={rightButtons}>
-        <View
-          style={{
-            flexDirection: 'row',
-            borderColor: '#333333',
-            borderWidth: 0.5,
-            borderStyle: 'solid',
-            height: 45,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Text style={{flex: 0.5}}>{t.name}:</Text>
-          <NumberInput topic={t.name} addEstimation={props.addEstimation} />
-          <View style={{flex: 0.2}} />
-        </View>
-      </Swipeable>
+      <View key={index}>
+        <Swipeable
+          onRightActionRelease={() => props.deleteTopic(t.name)}
+          rightContent={rightButtons}>
+          <View
+            style={{
+              flexDirection: 'row',
+              borderColor: '#333333',
+              borderWidth: 0.5,
+              borderStyle: 'solid',
+              height: 45,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{flex: 0.5}}>{t.name}:</Text>
+            <NumberInput topic={t} addEstimation={props.addEstimation} />
+            <View style={{flex: 0.2}} />
+          </View>
+        </Swipeable>
+      </View>
     );
   });
 
   return result;
 }
 
-type Props = {};
-export default class App extends Component<Props> {
-  constructor(props) {
-    super(props);
-    this.deleteElement = this.deleteElement.bind(this);
-    this.addEstimation = this.addEstimation.bind(this);
-    this.reset = this.reset.bind(this);
-    this.state = {
-      topics: [
-        {name: 'Documentation', estimation: 0},
-        {name: 'Localisation', estimation: 0},
-        {name: 'Legality', estimation: 0},
-        {name: 'Security', estimation: 0},
-        {name: 'Integration to the current system', estimation: 0},
-        {name: 'Implementation of the code', estimation: 0},
-        {name: 'Exception management', estimation: 0},
-        {name: 'Unit tests', estimation: 0},
-        {name: 'Integration tests', estimation: 0},
-        {name: 'e2e tests', estimation: 0},
-        {name: 'Manuel tests', estimation: 0},
-        {name: 'Code review', estimation: 0},
-        {name: 'Log Events', estimation: 0},
-        {name: 'Metrics', estimation: 0},
-        {name: 'Alarm', estimation: 0},
-        {name: 'Tracing', estimation: 0},
-        {name: 'Performance', estimation: 0},
-        {name: 'Package', estimation: 0},
-        {name: 'Deployment', estimation: 0},
-        {name: 'UX', estimation: 0},
-        {name: 'UI', estimation: 0},
-        {name: 'Accessibility', estimation: 0},
-      ],
-    };
+const initialTopics = [
+  {name: 'Documentation', estimation: 0},
+  {name: 'Localisation', estimation: 0},
+  {name: 'Legality', estimation: 0},
+  {name: 'Security', estimation: 0},
+  {name: 'Integration to the current system', estimation: 0},
+  {name: 'Implementation of the code', estimation: 0},
+  {name: 'Exception management', estimation: 0},
+  {name: 'Unit tests', estimation: 0},
+  {name: 'Integration tests', estimation: 0},
+  {name: 'e2e tests', estimation: 0},
+  {name: 'Manuel tests', estimation: 0},
+  {name: 'Code review', estimation: 0},
+  {name: 'Log Events', estimation: 0},
+  {name: 'Metrics', estimation: 0},
+  {name: 'Alarm', estimation: 0},
+  {name: 'Tracing', estimation: 0},
+  {name: 'Performance', estimation: 0},
+  {name: 'Package', estimation: 0},
+  {name: 'Deployment', estimation: 0},
+  {name: 'UX', estimation: 0},
+  {name: 'UI', estimation: 0},
+  {name: 'Accessibility', estimation: 0},
+];
+
+function EstimationComponent() {
+  const [topics, setTopics] = useState(initialTopics);
+
+  function deleteElement(element) {
+    const filteredElements = topics.filter(e => e.name !== element);
+    setTopics(filteredElements);
   }
 
-  deleteElement(element) {
-    const filteredElements = this.state.topics.filter(e => e.name !== element);
-    this.setState({topics: filteredElements});
-  }
-
-  addEstimation(element, estimation) {
-    const lol = this.state.topics.map(e => {
+  function addEstimation(element, estimation) {
+    const topicsWithEstimation = topics.map(e => {
       if (e.name === element) {
         e.estimation = estimation;
       }
       return e;
     });
 
-    this.setState({topics: lol});
+    setTopics(topicsWithEstimation);
   }
 
-  reset() {
-    this.setState({
-      topics: [
-        {name: 'Documentation', estimation: 0},
-        {name: 'Localisation', estimation: 0},
-        {name: 'Legality', estimation: 0},
-        {name: 'Security', estimation: 0},
-        {name: 'Integration to the current system', estimation: 0},
-        {name: 'Implementation of the code', estimation: 0},
-        {name: 'Exception management', estimation: 0},
-        {name: 'Unit tests', estimation: 0},
-        {name: 'Integration tests', estimation: 0},
-        {name: 'e2e tests', estimation: 0},
-        {name: 'Manuel tests', estimation: 0},
-        {name: 'Code review', estimation: 0},
-        {name: 'Log Events', estimation: 0},
-        {name: 'Metrics', estimation: 0},
-        {name: 'Alarm', estimation: 0},
-        {name: 'Tracing', estimation: 0},
-        {name: 'Performance', estimation: 0},
-        {name: 'Package', estimation: 0},
-        {name: 'Deployment', estimation: 0},
-        {name: 'UX', estimation: 0},
-        {name: 'UI', estimation: 0},
-        {name: 'Accessibility', estimation: 0},
-      ],
-    });
+  function reset() {
+    setTopics(initialTopics);
   }
 
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={styles.welcome}>Estimation time!</Text>
-          <Button
-            onPress={this.reset}
-            title="Reset"
-            color="#841584"
-            accessibilityLabel="Reset topics"
-          />
-          <IdealHours topics={this.state.topics} />
-          <FibonacciProposition topics={this.state.topics} />
-        </View>
-        <View style={{flex: 4}}>
-          <ScrollView>
-            <Estimations
-              topics={this.state.topics}
-              deleteTopic={this.deleteElement}
-              addEstimation={this.addEstimation}
-            />
-          </ScrollView>
-        </View>
+  return (
+    <View style={{flex: 1}}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text style={styles.welcome}>Estimation time!</Text>
+        <Button
+          onPress={reset}
+          title="Reset"
+          color="#841584"
+          accessibilityLabel="Reset topics"
+        />
+        <IdealHours topics={topics} />
+        <FibonacciProposition topics={topics} />
       </View>
-    );
+      <View style={{flex: 4}}>
+        <ScrollView>
+          <Estimations
+            topics={topics}
+            deleteTopic={deleteElement}
+            addEstimation={addEstimation}
+          />
+        </ScrollView>
+      </View>
+    </View>
+  );
+}
+type Props = {};
+export default class App extends Component<Props> {
+  render() {
+    return <EstimationComponent />;
   }
 }
 
@@ -241,10 +207,10 @@ function NumberInput(props) {
       style={{flex: 0.2, color: '#000000'}}
       keyboardType="numeric"
       onChangeText={input => {
-        props.addEstimation(props.topic, input);
+        props.addEstimation(props.topic.name, input);
         setEstimation(input);
       }}
-      value={estimation}
+      value={props.topic.estimation.toString()}
     />
   );
 }
