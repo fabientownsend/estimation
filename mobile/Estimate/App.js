@@ -206,6 +206,7 @@ function NumberInput(props) {
     <TextInput
       style={{flex: 0.2, color: '#000000'}}
       keyboardType="numeric"
+      selectTextOnFocus={true}
       onChangeText={input => {
         props.addEstimation(props.topic.name, input);
         setEstimation(input);
