@@ -173,6 +173,8 @@ export default class App extends Component<Props> {
             color="#841584"
             accessibilityLabel="Reset topics"
           />
+          <IdealHours topics={this.state.topics} />
+          <FibonacciProposition topics={this.state.topics} />
         </View>
         <View style={{flex: 4}}>
           <ScrollView>
@@ -186,6 +188,49 @@ export default class App extends Component<Props> {
       </View>
     );
   }
+}
+
+function hidealHours(e) {
+  let total = 0;
+  for (let {estimation} of e) {
+    if (estimation !== 0) {
+      total += Number(estimation);
+    }
+  }
+  const result = Math.round(total / 60);
+  return result;
+}
+
+function IdealHours(props) {
+  const idealHours = hidealHours(props.topics);
+  return <Text>Ideal hours: {idealHours}</Text>;
+}
+
+function FibonacciProposition(props) {
+  function closest(idealHour) {
+    const fibonacci = [0, 1, 2, 3, 5, 8, 13, 21, 34, 55];
+    const twoClosest = [];
+    if (fibonacci.includes(idealHour)) {
+      twoClosest.push(idealHour);
+    }
+
+    let min = idealHour - 1;
+    let max = idealHour + 1;
+    while (twoClosest.length < 2) {
+      if (fibonacci.includes(max)) {
+        twoClosest.push(max);
+      } else if (fibonacci.includes(min)) {
+        twoClosest.push(min);
+      }
+      min -= 1;
+      max += 1;
+    }
+    return twoClosest.join(', ');
+  }
+
+  const idealHours = hidealHours(props.topics);
+  const r = closest(idealHours);
+  return <Text>Fibonacci propositions: {r}</Text>;
 }
 
 function NumberInput(props) {
