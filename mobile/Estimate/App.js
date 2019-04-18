@@ -38,12 +38,13 @@ const topics = [
 
 function Estimations(props) {
   const topicsName = {
-    borderColor: '#333333',
+    borderColor: '#E0E0E0',
     borderWidth: 0.5,
     borderStyle: 'solid',
-    color: '#333333',
-    padding: 10,
+    color: '#FFFFFF',
+    padding: 12,
     fontSize: 20,
+    backgroundColor: '#B00020',
   };
 
   const result = props.topics.map((t, index) => {
@@ -57,10 +58,10 @@ function Estimations(props) {
           <View
             style={{
               flexDirection: 'row',
-              borderColor: '#333333',
+              borderColor: '#E0E0E0',
               borderWidth: 0.5,
               borderStyle: 'solid',
-              height: 45,
+              height: 50,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -125,15 +126,41 @@ function EstimationComponent() {
   }
 
   return (
-    <View style={{flex: 1}}>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={styles.welcome}>Estimation time!</Text>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+      }}>
+      <View
+        style={{
+          flex: 0.5,
+          flexDirection: 'row',
+          backgroundColor: '#6200EE',
+          alignItems: 'flex-end',
+          justifyContent: 'space-around',
+          paddingBottom: 20,
+        }}>
+        <View
+          style={{
+            width: 50,
+          }}
+        />
+        <Text
+          style={{
+            color: '#FFFFFF',
+            fontSize: 20,
+          paddingBottom: 6,
+          }}>
+          Estimation time
+        </Text>
         <Button
           onPress={reset}
           title="Reset"
-          color="#841584"
+          color="#FFFFFF"
           accessibilityLabel="Reset topics"
         />
+      </View>
+      <View style={{flex: 0.5, justifyContent: 'center', alignItems: 'center'}}>
         <IdealHours topics={topics} />
         <FibonacciProposition topics={topics} />
       </View>
@@ -149,7 +176,9 @@ function EstimationComponent() {
     </View>
   );
 }
+
 type Props = {};
+
 export default class App extends Component<Props> {
   render() {
     return <EstimationComponent />;
